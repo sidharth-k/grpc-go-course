@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+package calculator;
+option go_package = "calculator_pb";
+
+message Sum{
+    int32 first =1;
+    int32 second = 2;
+}
+
+message SumRequest{
+    Sum sum = 1;
+}
+
+message SumResponse{
+    int32 result = 1;
+    google.protobuf.Any msg =2;
+}
+
+message PRequest{
+    int32 number = 1;
+}
+
+message PResponse{
+    int32 number = 1;
+}
+
+message AverageRequest{
+    int32 number = 1;
+}
+
+message AverageResponse{
+    double number = 1;
+}
+service calculatorService{
+    rpc Sum(SumRequest) returns(SumResponse){};
+    rpc PrimeNumberDecomposition(PRequest) returns(stream PResponse){};
+    rpc Average(stream AverageRequest) returns(AverageResponse){};
+}
+
+enum test{
+    T =0;
+    U =1;
+}
